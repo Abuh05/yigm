@@ -750,7 +750,6 @@
       this.touchMove = wrapFunc(this.element, option.touchMove || noop);
       this.touchEnd = wrapFunc(this.element, option.touchEnd || noop);
       this.touchCancel = wrapFunc(this.element, option.touchCancel || noop);
-      this.translateContainer = this.element;
       this._cancelAllHandler = this.cancelAll.bind(this);
       window.addEventListener('scroll', this._cancelAllHandler);
       this.delta = null;
@@ -771,13 +770,6 @@
       key: "start",
       value: function start(evt) {
         if (!evt.touches) {
-          return;
-        }
-
-        var ignoreDragFor = ['a', 'button', 'input'];
-
-        if (evt.target && evt.target.nodeName && ignoreDragFor.indexOf(evt.target.nodeName.toLowerCase()) >= 0) {
-          console.log('ignore drag for this touched element', evt.target.nodeName.toLowerCase());
           return;
         }
 
@@ -1036,15 +1028,8 @@
 
   function resetSlideMove(slide) {
     var transitionEnd = whichTransitionEvent();
-    var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     var media = hasClass(slide, 'gslide-media') ? slide : slide.querySelector('.gslide-media');
-    var container = closest(media, '.ginner-container');
     var desc = slide.querySelector('.gslide-description');
-
-    if (windowWidth > 769) {
-      media = container;
-    }
-
     addClass(media, 'greset');
     cssTransform(media, 'translate3d(0, 0, 0)');
     addEvent(transitionEnd, {
@@ -1121,12 +1106,6 @@
 
           if (hasClass(media, 'gslide-image')) {
             mediaImage = media.querySelector('img');
-          }
-
-          var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-          if (windowWidth > 769) {
-            media = currentSlide.querySelector('.ginner-container');
           }
 
           removeClass(overlay, 'greset');
@@ -1750,14 +1729,6 @@
       img.setAttribute('aria-describedby', textID);
     }
 
-    if (data.hasOwnProperty('_hasCustomWidth') && data._hasCustomWidth) {
-      img.style.width = data.width;
-    }
-
-    if (data.hasOwnProperty('_hasCustomHeight') && data._hasCustomHeight) {
-      img.style.height = data.height;
-    }
-
     slideMedia.insertBefore(img, slideMedia.firstChild);
     return;
   }
@@ -2090,7 +2061,7 @@
           if (config.trim() !== '') {
             each(data, function (val, key) {
               var str = config;
-              var match = 's?' + key + 's?:s?(.*?)(' + cleanKeys + 's?:|$)';
+              var match = '\s?' + key + '\s?:\s?(.*?)(' + cleanKeys + '\s?:|$)';
               var regex = new RegExp(match);
               var matches = str.match(regex);
 
@@ -2118,23 +2089,9 @@
           }
         }
 
-        if (data.description && data.description.substring(0, 1) === '.') {
-          var description;
-
-          try {
-            description = document.querySelector(data.description).innerHTML;
-          } catch (error) {
-            if (!(error instanceof DOMException)) {
-              throw error;
-            }
-          }
-
-          if (description) {
-            data.description = description;
-          }
-        }
-
-        if (!data.description) {
+        if (data.description && data.description.substring(0, 1) == '.' && document.querySelector(data.description)) {
+          data.description = document.querySelector(data.description).innerHTML;
+        } else {
           var nodeDesc = element.querySelector('.glightbox-desc');
 
           if (nodeDesc) {
@@ -2142,24 +2099,17 @@
           }
         }
 
-        this.setSize(data, settings, element);
+        this.setSize(data, settings);
         this.slideConfig = data;
         return data;
       }
     }, {
       key: "setSize",
       value: function setSize(data, settings) {
-        var element = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
         var defaultWith = data.type == 'video' ? this.checkSize(settings.videosWidth) : this.checkSize(settings.width);
         var defaultHeight = this.checkSize(settings.height);
         data.width = has(data, 'width') && data.width !== '' ? this.checkSize(data.width) : defaultWith;
         data.height = has(data, 'height') && data.height !== '' ? this.checkSize(data.height) : defaultHeight;
-
-        if (element && data.type == 'image') {
-          data._hasCustomWidth = element.dataset.width ? true : false;
-          data._hasCustomHeight = element.dataset.height ? true : false;
-        }
-
         return data;
       }
     }, {
@@ -2414,7 +2364,7 @@
     return Slide;
   }();
 
-  var _version = '3.0.9';
+  var _version = '3.0.8';
 
   var isMobile$1 = isMobile();
 
@@ -2457,8 +2407,8 @@
     closeOnOutsideClick: true,
     plugins: false,
     plyr: {
-      css: 'https://cdn.plyr.io/3.6.8/plyr.css',
-      js: 'https://cdn.plyr.io/3.6.8/plyr.js',
+      css: 'https://cdn.plyr.io/3.6.3/plyr.css',
+      js: 'https://cdn.plyr.io/3.6.3/plyr.js',
       config: {
         ratio: '16:9',
         fullscreen: {
@@ -2521,7 +2471,6 @@
 
       _classCallCheck(this, GlightboxInit);
 
-      this.customOptions = options;
       this.settings = extend(defaults, options);
       this.effectsClasses = this.getAnimationClasses();
       this.videoPlayers = {};
@@ -3008,10 +2957,8 @@
         }
 
         animateElement(prevSlide, animOut, function () {
-          var container = prevSlide.querySelector('.ginner-container');
           var media = prevSlide.querySelector('.gslide-media');
           var desc = prevSlide.querySelector('.gslide-description');
-          container.style.transform = '';
           media.style.transform = '';
 
           removeClass(media, 'greset');
@@ -3409,6 +3356,7 @@
         if (image) {
           if (winWidth <= 768) {
             var imgNode = image.querySelector('img');
+            imgNode.setAttribute('style', '');
           } else if (descriptionResize) {
             var descHeight = description.offsetHeight;
 
@@ -3471,10 +3419,10 @@
               description.setAttribute('style', "max-width: ".concat(vsize.width, "px;"));
             }
           } else {
-            video.parentNode.style.maxWidth = "".concat(videoWidth);
+            video.parentNode.style.maxWidth = "".concat(maxWidth);
 
             if (descriptionResize) {
-              description.setAttribute('style', "max-width: ".concat(videoWidth, ";"));
+              description.setAttribute('style', "max-width: ".concat(maxWidth, ";"));
             }
           }
         }
