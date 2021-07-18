@@ -24,10 +24,89 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  
+  <style>
+    /*--------------------------------------------------------------
+# Team
+--------------------------------------------------------------*/
+.team {
+  background: #fff;
+}
+
+.team .member {
+  position: relative;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.team .member .pic {
+  overflow: hidden;
+  width: 300px;
+  border-radius: 50%;
+}
+
+.team .member .pic img {
+  transition: ease-in-out 0.3s;
+}
+
+.team .member:hover img {
+  transform: scale(1.1);
+}
+
+.team .member .member-info {
+  padding-left: 30px;
+}
+
+.team .member h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #354144;
+}
+
+.team .member span {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+}
+
+.team .member span::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: #b4c1c4;
+  bottom: 0;
+  left: 250px;
+}
+
+.team .member p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+}
+
+.team .member .social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+  </style>
 </head>
 
 <body>
@@ -51,13 +130,13 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="index.html">YIGMs</a></h1>
+        <img src="assets/img/student/logo.jpeg" alt="">
        
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li class="dropdown"><a href="#"><span>Activities</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                   <li><a href="#">Evangelism</a></li>
@@ -72,7 +151,7 @@
                   <li><a href="#">Project Deeper</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link scrollto" href="#">Training</a></li>
+              <li><a class="nav-link scrollto" href="#team">Training</a></li>
               <li class="dropdown"><a href="#"><span>Partnership</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                   <li><a href="#">Volunteer</a></li>
@@ -89,13 +168,13 @@
               </li>
               <li class="dropdown"><a href="#"><span>Who are we</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                  <li><a href="#">History</a></li>
-                  <li><a href="#">Advisory Board</a></li>
+                  <li><a href="history.html">History</a></li>
+                  <li><a href="board.html">Advisory Board</a></li>
                   <li><a href="#">Leadership</a></li>
                   <li><a href="#">Satff & Volunteers</a></li>
                 </ul>
               </li>
-          <li><a class="getstarted scrollto" href="#">Donation</a></li>
+          <li><a class="getstarted scrollto" href="#about">Donation</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -103,86 +182,69 @@
     </div>
   </header><!-- End Header -->
 
-   
-
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+    <section id="team" class="team">
       <div class="container">
 
         <div class="section-title">
-          <h2 data-aos="fade-up">Team</h2>
+          <h2>Board of Advisors</h2>
         </div>
 
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="assets/img/team/team-7.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Walter White</h4>
                 <span>Chief Executive Officer</span>
+                <p>
+                  Rev. Bill Massaquoi is chairman of Board of Advisors for YIGMs. 
+                  Bill Massaquoi is not only a teacher of the Word but also an experienced manager. 
+                   </p>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/teamR2.png" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="assets/img/team/team-6.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
-                <h4>Roger T. Miller Sr</h4>
-                <span>Campus Volunteer.</span>
+                <h4>Rev. Bill Massaquoi</h4>
+                <span>Chairman of the Board of  Advisors</span>
+                <p> 
+                  He is not only a teacher of the Word but also an experienced manager. 
+                  He is the Founder and Executive Director of Rebuild Africa Inc, a nonprofit that specializes in education.
+                   He is a development specialist with experience in microfinance, health, and education.</p>
+                
               </div>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/teamR1.png" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="assets/img/team/team-5.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
-                <h4>Emily Joyce Williams</h4>
-                <span>Campus Volunteer/University Student</span>
+                <h4>Past. Tee Augustine Dorbor</h4>
+                <span>Director</span>
+                <p>He is a very Committed and passionate missionary
+                   with with CMF and works at Christian Missionary Foundation, Liberia. 
+                  He is a graduate of the Liberia Baptist theological Seminary and ECWA 
+                  Theological Seminary, Igbaja, Kwara State, Nigeria. </p>
+                
               </div>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/teamR.png" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="assets/img/team/team-4.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
-                <h4>Eugene Boyah</h4>
-                <span>Student Volunteer/Bible Club</span>
+                <h4>Amanda Jepson</h4>
+                <span>Accountant</span>
+                <p>Dr. Albertha J. N.  Clark Kollie has a heart for God and a burning desire to serve humanity. 
+                   She is the First Liberian trained Female Surgeon who lives and works in Liberia.</p>
+               
               </div>
             </div>
           </div>
@@ -191,6 +253,7 @@
 
       </div>
     </section><!-- End Team Section -->
+
 
 
 
